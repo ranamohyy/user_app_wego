@@ -14,7 +14,7 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="Handyman Service User"
+        android:label="Wagoo"
         android:requestLegacyExternalStorage="true"
         tools:replace="android:label">
         <meta-data
@@ -104,7 +104,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB9h4IGuxCEY9YjuQMudmABSr92-L-pxaI"
+            android:value="AIzaSyCmqWEuigoKCJ_FQS8IHM_CsNIUtWUiIgA"
             />
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

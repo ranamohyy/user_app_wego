@@ -19,6 +19,19 @@ const double SETTING_ICON_SIZE = 18;
 const double CATEGORY_ICON_SIZE = 70;
 const double SUBCATEGORY_ICON_SIZE = 45;
 const APP_BAR_TEXT_SIZE = 18;
+
+// Responsive text sizes (use with scale or app text styles)
+const double TEXT_SIZE_XS = 10;
+const double TEXT_SIZE_SMALL = 12;
+const double TEXT_SIZE_BODY = 13;
+const double TEXT_SIZE_SUBTITLE = 15;
+const double TEXT_SIZE_HEADING = 20;
+const double TEXT_SIZE_TITLE = 24;
+const double TEXT_SIZE_HERO = 28;
+
+// Design size base for responsive scaling (width / height)
+const double DESIGN_WIDTH = 360;
+const double DESIGN_HEIGHT = 800;
 const MARK_AS_READ = 'markas_read';
 const IS_CURRENT_LOCATION = 'CURRENT_LOCATION';
 const GET_LOCATION_API_TIMEOUT_SECOND = 15;
@@ -85,6 +98,7 @@ const LIVESTREAM_PAUSE_TIMER = "pauseTimer";
 const LIVESTREAM_UPDATE_BIDER = 'updateBiderData';
 const LIVESTREAM_FIREBASE = "LIVESTREAM_FIREBASE";
 const LIVESTREAM_UPDATE_HELP_DESK_LIST = "LIVESTREAM_UPDATE_HELP_DESK_LIST";
+const LIVESTREAM_DASHBOARD_SELECT_INDEX = "dashboardSelectIndex";
 //endregion
 
 //region default USER login

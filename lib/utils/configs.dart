@@ -1,13 +1,13 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
-const APP_NAME = 'Handyman Service';
+const APP_NAME = 'Wagoo';
 const APP_NAME_TAG_LINE = 'On-Demand Home Services App';
-var defaultPrimaryColor = Color(0xFF5F60B9);
+var defaultPrimaryColor = Color(0xFFF5A623);
 
 // Don't add slash at the end of the url
 
-const DOMAIN_URL = 'http://192.168.1.181:8000'; // Don't add slash at the end of the url
+const DOMAIN_URL = 'http://127.0.0.1:8000'; // Don't add slash at the end of the url
 const BASE_URL = '$DOMAIN_URL/api/';
 
 const DEFAULT_LANGUAGE = 'en';

@@ -301,7 +301,7 @@ Future<void> getAppConfigurations({bool isCurrentLocation = false, double? lat, 
       );
       await setAppConfigurations(res);
     } catch (e) {
-      throw e;
+      log('getAppConfigurations failed (app continues with existing config): $e');
     }
   }
 }

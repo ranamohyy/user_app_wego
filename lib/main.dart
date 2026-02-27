@@ -13,7 +13,6 @@ import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/model/user_data_model.dart';
 import 'package:booking_system_flutter/model/user_wallet_history.dart';
 import 'package:booking_system_flutter/screens/auth/otp_login_screen.dart';
-import 'package:booking_system_flutter/screens/auth/sign_in_screen.dart';
 import 'package:booking_system_flutter/screens/blog/model/blog_detail_response.dart';
 import 'package:booking_system_flutter/screens/blog/model/blog_response_model.dart';
 import 'package:booking_system_flutter/screens/category/category_screen.dart';
@@ -179,7 +178,7 @@ class _MyAppState extends State<MyApp> {
                 debugShowCheckedModeBanner: false,
                 navigatorKey: navigatorKey,
 
-                home:SignInScreen(),
+                home: SplashScreen(),
                 theme: AppTheme.lightTheme(color: snap.data),
                 darkTheme: AppTheme.darkTheme(color: snap.data),
                 themeMode: appStore.isDarkMode ? ThemeMode.dark : ThemeMode.light,

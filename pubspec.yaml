@@ -97,6 +97,8 @@ dependencies:
   share_plus: ^10.0.2
   app_links: ^6.3.2
   dotted_border: ^2.1.0
+  curved_navigation_bar: ^1.0.6
+  flutter_launcher_icons: ^0.14.4
 
 
 dev_dependencies:
@@ -104,6 +106,13 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.4.12
   mobx_codegen: ^2.6.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/ic_app_logo.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/ic_app_logo.png"
 
 flutter:
   uses-material-design: true

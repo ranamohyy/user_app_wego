@@ -1,0 +1,11 @@
+export  'package:flutter/material.dart';
+export 'package:google_fonts/google_fonts.dart';
+export 'package:nb_utils/nb_utils.dart';
+export '../../../../../component/cached_image_widget.dart';
+export '../../../../../main.dart';
+export '../../../../../model/service_data_model.dart';
+export '../../../../../utils/colors.dart';
+export '../../../../../utils/constant.dart';
+export '../../../../../utils/responsive.dart';
+export 'package:booking_system_flutter/screens/service/service_detail_screen.dart';
+export 'package:booking_system_flutter/screens/dashboard/fragment/home_widgets.dart';

@@ -85,7 +85,7 @@ class ProfileFragmentState extends State<ProfileFragment> {
         showBack: false,
         actions: [
           IconButton(
-            icon: ic_setting.iconImage(color: white, size: 20),
+            icon: Icon(Icons.settings),
             onPressed: () async {
               SettingScreen().launch(context);
             },
@@ -126,7 +126,7 @@ class ProfileFragmentState extends State<ProfileFragment> {
                                 alignment: Alignment.bottomCenter,
                                 clipBehavior: Clip.none,
                                 children: [
-                                  CachedImageWidget(url: appStore.userProfileImage, height: 70, width: 70, circle: true, fit: BoxFit.cover).paddingBottom(6),
+                                  // CachedImageWidget(url: appStore.userProfileImage, height: 70, width: 70, circle: true, fit: BoxFit.cover).paddingBottom(6),
                                   /*   Positioned(
                                     child: Container(
                                       alignment: Alignment.center,
@@ -143,7 +143,7 @@ class ProfileFragmentState extends State<ProfileFragment> {
                                   ),*/
                                 ],
                               ),
-                              24.width,
+                              // 24.width,
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

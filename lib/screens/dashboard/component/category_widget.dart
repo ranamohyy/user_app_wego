@@ -1,5 +1,4 @@
 import 'dart:math' as math;
-
 import 'package:booking_system_flutter/component/cached_image_widget.dart';
 import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/category_model.dart';
@@ -8,10 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 import '../../newDashboard/dashboard_3/component/category_dashboard_component_3.dart';
 import '../../newDashboard/dashboard_4/component/category_dashboard_component_4.dart';
-
 class CategoryWidget extends StatelessWidget {
   final CategoryData categoryData;
   final double? width;
@@ -20,12 +17,12 @@ class CategoryWidget extends StatelessWidget {
   CategoryWidget({required this.categoryData, this.width, this.isFromCategory});
 
   Widget buildDefaultComponent(BuildContext context) {
-    final cellWidth = width ?? context.width() / 4 - 20;
+    final cellWidth = width ?? context.width() / 3.2- 20;
     final iconSize = math.min(CATEGORY_ICON_SIZE, cellWidth - 8);
     return SizedBox(
       width: cellWidth,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
         children: [
           categoryData.categoryImage.validate().endsWith('.svg')
               ? Container(
@@ -52,7 +49,9 @@ class CategoryWidget extends StatelessWidget {
                   width: iconSize,
                   height: iconSize,
                   padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(color: appStore.isDarkMode ? Colors.white24 : context.cardColor, shape: BoxShape.circle),
+                  decoration: BoxDecoration(
+                      color: appStore.isDarkMode ? Colors.white24 : context.cardColor,
+                      shape: BoxShape.circle),
                   child: CachedImageWidget(
                     url: categoryData.categoryImage.validate(),
                     fit: BoxFit.cover,
@@ -68,8 +67,9 @@ class CategoryWidget extends StatelessWidget {
             child: Text(
               '${categoryData.name.validate()}',
               style: primaryTextStyle(size: 12),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+
+              // maxLines: 2,
+              // overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
             ),
           ),

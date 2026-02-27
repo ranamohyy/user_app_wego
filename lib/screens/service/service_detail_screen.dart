@@ -4,6 +4,7 @@ import 'package:booking_system_flutter/component/empty_error_state_widget.dart';
 import 'package:booking_system_flutter/component/loader_widget.dart';
 import 'package:booking_system_flutter/component/online_service_icon_widget.dart';
 import 'package:booking_system_flutter/component/price_widget.dart';
+import 'package:booking_system_flutter/component/cached_image_widget.dart';
 import 'package:booking_system_flutter/component/view_all_label_component.dart';
 import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/package_data_model.dart';
@@ -26,6 +27,7 @@ import 'package:booking_system_flutter/screens/service/package/package_component
 import 'package:booking_system_flutter/screens/service/shimmer/service_detail_shimmer.dart';
 import 'package:booking_system_flutter/screens/shop/shop_list_screen.dart';
 import 'package:booking_system_flutter/store/service_addon_store.dart';
+import 'package:booking_system_flutter/features/payment/presentation/screens/payment_method_screen.dart';
 import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:booking_system_flutter/utils/common.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
@@ -364,6 +366,91 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> with TickerPr
     });
   }
 
+  Widget _buildOfflineServiceBody(ServiceData service) {
+    final imageUrl = service.serviceAttachments.validate().isNotEmpty ? service.serviceAttachments!.first.validate() : '';
+    final amount = service.getDiscountedPrice.validate(value: service.price.validate());
+
+    return AppScaffold(
+      appBarTitle: service.categoryName.validate().isNotEmpty ? service.categoryName.validate() : service.name.validate(),
+      showLoader: false,
+      child: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(bottom: 120),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    16.height,
+                    if (imageUrl.isNotEmpty)
+                      CachedImageWidget(
+                        url: imageUrl,
+                        height: 220,
+                        width: context.width(),
+                        fit: BoxFit.cover,
+                        placeHolderImage: '',
+                      ).paddingSymmetric(horizontal: 16),
+                    16.height,
+                    Text(
+                      service.name.validate(),
+                      style: primaryTextStyle(weight: FontWeight.bold, size: 16),
+                    ).paddingSymmetric(horizontal: 16),
+                    8.height,
+                    if (service.duration.validate().isNotEmpty)
+                      Row(
+                        children: [
+                          Text(language.duration, style: secondaryTextStyle()),
+                          8.width,
+                          Text(
+                            service.duration.validate(),
+                            style: secondaryTextStyle(weight: FontWeight.bold, color: textPrimaryColorGlobal),
+                          ),
+                        ],
+                      ).paddingSymmetric(horizontal: 16),
+                    8.height,
+                    Row(
+                      children: [
+                        PriceWidget(
+                          size: 16,
+                          price: amount,
+                        ),
+                      ],
+                    ).paddingSymmetric(horizontal: 16),
+                    16.height,
+                    Text(
+                      service.description.validate(value: language.lblNotDescription),
+                      style: secondaryTextStyle(),
+                    ).paddingSymmetric(horizontal: 16),
+                  ],
+                ),
+              ),
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AppButton(
+                  onTap: () {
+                    final price = service.getDiscountedPrice.validate(value: service.price.validate());
+                    PaymentMethodScreen(
+                      itemId: service.id.validate(),
+                      itemTitle: service.name.validate(),
+                      amount: price,
+                    ).launch(context);
+                  },
+                  color: context.primaryColor,
+                  child: Text('Proceed to Payment', style: boldTextStyle(color: white)),
+                  width: context.width(),
+                  textColor: Colors.white,
+                ),
+              ],
+            ).paddingSymmetric(horizontal: 16.0, vertical: 10.0),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   void setState(fn) {
     if (mounted) super.setState(fn);
@@ -379,6 +466,9 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> with TickerPr
   Widget build(BuildContext context) {
     Widget buildBodyWidget(AsyncSnapshot<ServiceDetailResponse> snap) {
       if (snap.hasError) {
+        if (widget.service != null) {
+          return _buildOfflineServiceBody(widget.service!);
+        }
         return NoDataWidget(
           title: snap.error.toString(),
           imageWidget: ErrorStateWidget(),
@@ -569,15 +659,40 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> with TickerPr
                     ],
                   ),
                 ),
-                AppButton(
-                  onTap: () {
-                    selectedPackage = null;
-                    bookNow(snap.data!);
-                  },
-                  color: context.primaryColor,
-                  child: Text(language.lblBookNow, style: boldTextStyle(color: white)),
-                  width: context.width(),
-                  textColor: Colors.white,
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AppButton(
+                      onTap: () {
+                        selectedPackage = null;
+                        bookNow(snap.data!);
+                      },
+                      color: context.primaryColor,
+                      child: Text(language.lblBookNow, style: boldTextStyle(color: white)),
+                      width: context.width(),
+                      textColor: Colors.white,
+                    ),
+                    8.height,
+                    AppButton(
+                      onTap: () {
+                        final detail = snap.data!.serviceDetail!;
+                        final amount = detail.getDiscountedPrice.validate(value: detail.price.validate());
+
+                        PaymentMethodScreen(
+                          itemId: detail.id.validate(),
+                          itemTitle: detail.name.validate(),
+                          amount: amount,
+                        ).launch(context);
+                      },
+                      color: Colors.white,
+                      child: Text(
+                        'Proceed to Payment',
+                        style: boldTextStyle(color: context.primaryColor),
+                      ),
+                      width: context.width(),
+                      textColor: context.primaryColor,
+                    ),
+                  ],
                 ).paddingSymmetric(horizontal: 16.0, vertical: 10.0)
               ],
             ),

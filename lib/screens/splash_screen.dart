@@ -1,4 +1,5 @@
 import 'package:booking_system_flutter/main.dart';
+import 'package:booking_system_flutter/screens/auth/sign_in_screen.dart';
 import 'package:booking_system_flutter/screens/dashboard/dashboard_screen.dart';
 import 'package:booking_system_flutter/screens/maintenance_mode_screen.dart';
 import 'package:booking_system_flutter/utils/configs.dart';
@@ -67,7 +68,12 @@ class _SplashScreenState extends State<SplashScreen> {
         if (getBoolAsync(IS_FIRST_TIME, defaultValue: true)) {
           WalkThroughScreen().launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
         } else {
-          DashboardScreen().launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
+          // If user is already logged in (cached), go to home (dashboard) directly
+          if (appStore.isLoggedIn && appStore.token.validate().isNotEmpty) {
+            DashboardScreen().launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
+          } else {
+            SignInScreen().launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
+          }
         }
       }
     }

@@ -48,7 +48,7 @@ class CategoryComponentState extends State<CategoryComponent> {
         ).paddingSymmetric(horizontal: 16),
         AnimatedWrap(
           spacing: 16,
-          runSpacing: 16,
+          runSpacing: 18,
           itemCount: widget.categoryList.validate().length,
           itemBuilder: (ctx, i) {
             CategoryData data = widget.categoryList![i];
